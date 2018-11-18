@@ -67,8 +67,6 @@ public class ThePit extends JavaPlugin {
 		
 		PerkManager.registerPerks();
 		
-		
-		
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new BukkitRunnable() {
 			
 			@Override
