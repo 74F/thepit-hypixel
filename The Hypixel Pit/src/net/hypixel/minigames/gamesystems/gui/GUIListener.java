@@ -12,7 +12,6 @@ import com.google.common.collect.Maps;
 import net.hypixel.minigames.gamesystems.gui.BaseGUI.GUIClickEventHandler;
 
 public class GUIListener implements Listener {
-
 	public final Map<Player, BaseGUI> guis = Maps.newHashMap();
 
 	public void create(Player player, String name, int size, GUIClickEventHandler handler) {

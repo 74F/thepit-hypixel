@@ -58,7 +58,6 @@ public class ItemUtils {
 				}
 
 			}
-
 		} catch (Exception ignored) {
 		}
 		return itemStack;

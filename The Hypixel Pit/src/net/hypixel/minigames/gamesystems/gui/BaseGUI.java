@@ -10,7 +10,6 @@ import org.bukkit.inventory.ItemStack;
 import net.hypixel.minigames.ThePit;
 
 public class BaseGUI {
-	
 	private String name;
 	private int size;
 	private GUIClickEventHandler handler;
@@ -18,12 +17,12 @@ public class BaseGUI {
 	private ItemStack[] optionIcons;
 
 	public BaseGUI(String name, int size, GUIClickEventHandler handler) {
-        this.name = name;
-        this.size = size;
-        this.handler = handler;
-        this.optionNames = new String[size];
-        this.optionIcons = new ItemStack[size];
-    }
+		this.name = name;
+		this.size = size;
+		this.handler = handler;
+		this.optionNames = new String[size];
+		this.optionIcons = new ItemStack[size];
+	}
 
 	public BaseGUI setOption(int position, ItemStack icon, String name, String[] info) {
 		this.optionNames[position] = name;
