@@ -22,6 +22,7 @@ import net.hypixel.minigames.upgrades.perks.PerkRambo;
 public class ThePit extends JavaPlugin {
 
 	private static String version = "v0.1";
+	private GUIListener GL;
 	
 	@SuppressWarnings("deprecation")
 	public void onEnable() {
@@ -43,11 +44,11 @@ public class ThePit extends JavaPlugin {
 		DoPrestigeCMD.setPermission("pit.test");
 		DoPrestigeCMD.setPermissionMessage("This is Test Command for Developer, You cannot use this!");
 		
-		
+		GL = new GUIListener();
 
 		//new Leaderboard(this, new Location(Bukkit.getWorlds().get(0), 13.5, 119, 0.5));
 		getServer().getPluginManager().registerEvents(new ListenerEvent(), this);
-		getServer().getPluginManager().registerEvents(new GUIListener(), this);
+		getServer().getPluginManager().registerEvents(GL, this);
 		getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 		getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", new PML_Bungee());
 		Bukkit.getConsoleSender().sendMessage("」aThe Hypixel Pit 」7- 」eCopied by 74F / Special Thanks: 」c[ADMIN] Minikloon 」eon Hypixel");
@@ -63,8 +64,6 @@ public class ThePit extends JavaPlugin {
 		}
 		
 		PerkManager.registerPerks();
-		
-		
 		
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new BukkitRunnable() {
 			
@@ -97,6 +96,10 @@ public class ThePit extends JavaPlugin {
 
 	public static ThePit getInstance() {
 		return ThePit.getPlugin(ThePit.class);
+	}
+	
+	public static GUIListener getGL() {
+		return getInstance().GL;
 	}
 	
 	public String getVersion() {
