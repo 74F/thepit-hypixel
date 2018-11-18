@@ -1,0 +1,12 @@
+name: ThePit
+version: 1.0
+author: 74F
+main: net.hypixel.minigames.ThePit
+
+commands:
+  opengui:
+  doprestige:
+
+permissions:
+  pit.test:
+    default: op

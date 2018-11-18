@@ -1,0 +1,23 @@
+scoreboard:
+  default:
+  - '{DATE} {SERVER}'
+  - '」f'
+  prestige:
+  - 'Prestige: {PRESTIGE}'
+  no-event:
+  - 'Level: {LEVEL}'
+  - 'Needed XP: {NEEDED_XP}'
+  - '」f」f'
+  - 'Gold: {GOLD}'
+  - '」f」f」f'
+  - 'Status: {USER_STATUS}'
+  - '」f」f」f」f'
+  - '」ewww.hypixel.net'
+  waiting-event:
+  - '」f'
+  event:
+    ragepit:
+    - 'Event: {EVENT}'
+    - 'Starting in {EVENT_STARTS_AT}'
+  
+  
