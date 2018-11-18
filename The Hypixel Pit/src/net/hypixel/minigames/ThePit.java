@@ -12,6 +12,7 @@ import net.hypixel.minigames.bungeecord.PML_Bungee;
 import net.hypixel.minigames.gamesystems.commands.Command_DoPrestige;
 import net.hypixel.minigames.gamesystems.commands.Command_OpenGui;
 import net.hypixel.minigames.gamesystems.file.ConfigurationsList;
+import net.hypixel.minigames.gamesystems.gui.GUIListener;
 import net.hypixel.minigames.gamesystems.listeners.ListenerEvent;
 import net.hypixel.minigames.gamesystems.manager.PerkManager;
 import net.hypixel.minigames.gamesystems.schedulers.FreeXP;
@@ -49,12 +50,12 @@ public class ThePit extends JavaPlugin {
 		//new Leaderboard(this, new Location(Bukkit.getWorlds().get(0), 13.5, 119, 0.5));
 		
 		getServer().getPluginManager().registerEvents(new ListenerEvent(), this);
+		getServer().getPluginManager().registerEvents(new GUIListener(), this);
 		getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 		getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", new PML_Bungee());
 		Bukkit.getConsoleSender().sendMessage("」aThe Hypixel Pit 」7- 」eCopied by 74F / Version: " + getVersion());
 		Bukkit.getConsoleSender().sendMessage("」aThe Hypixel Pit 」7- 」aEnabled!");
 		Bukkit.getConsoleSender().sendMessage("」aThe Hypixel Pit 」7- 」bWelcome to the Hypixel Pit!");
-		
 		
 		ConfigurationsList.Startup_ScoreboardConfig();
 		ConfigurationsList.getScoreboardConfig().options().copyDefaults(true);
