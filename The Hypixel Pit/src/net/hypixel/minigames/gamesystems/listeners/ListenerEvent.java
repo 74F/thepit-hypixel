@@ -8,12 +8,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
-import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.TNTPrimed;
-import org.bukkit.entity.Villager;
-import org.bukkit.entity.Villager.Profession;
 import org.bukkit.event.Event.Result;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,8 +18,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-import org.bukkit.event.entity.EntitySpawnEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -39,16 +34,14 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import me.vagdedes.mysql.database.SQL;
-import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
-import net.citizensnpcs.npc.CitizensNPC;
 import net.hypixel.minigames.Settings;
 import net.hypixel.minigames.ThePit;
+import net.hypixel.minigames.gamesystems.gui.sub.AllStatsViewerGUI;
 import net.hypixel.minigames.gamesystems.manager.BountyManager;
 import net.hypixel.minigames.gamesystems.manager.ExperienceManager;
 import net.hypixel.minigames.gamesystems.manager.GoldManager;
 import net.hypixel.minigames.gamesystems.manager.PerkManager;
-import net.hypixel.minigames.gamesystems.manager.PrestigeManager;
 import net.hypixel.minigames.gamesystems.manager.TitleManager;
 import net.hypixel.minigames.gamesystems.status.UserStatus;
 import net.hypixel.minigames.upgrades.perks.PerkBarbarian;
@@ -60,7 +53,6 @@ import net.hypixel.minigames.upgrades.perks.PerkVampire;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent.ChatSerializer;
 import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
-import net.minecraft.server.v1_8_R3.PacketPlayOutPlayerInfo;
 
 @SuppressWarnings("all")
 public class ListenerEvent implements Listener {
@@ -68,7 +60,7 @@ public class ListenerEvent implements Listener {
 	@EventHandler
 	public void onLoggedIn(PlayerJoinEvent event) {
 		if(!SQL.exists("uuid", event.getPlayer().getUniqueId().toString(), "thepit")) {
-			SQL.insertData("uuid, prestige, level, xp, total_xp, kills, assists, sword_hits, arrow_shot, arrow_hits, melee_damage_dealt, bow_damage_dealt, highest_streak, deaths, melee_damage_taken, bow_damage_taken, hours_played, total_gold, golds, gold_current_prestige, left_clicks, gold_earned, diamond_purchased, chat, block_place, block_break, jump_pit, launcher, gapple_eat, ghead_eat, lava_bucket_use, fishing_rod, contract_count, bounty, renown", "'" + event.getPlayer().getUniqueId().toString() + "', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0'", "thepit");
+			SQL.insertData("uuid, prestige, level, xp, total_xp, kills, assists, sword_hits, arrow_shot, arrow_hits, melee_damage_dealt, bow_damage_dealt, highest_streak, deaths, melee_damage_taken, bow_damage_taken, hours_played, total_gold, golds, gold_current_prestige, left_clicks, gold_earned, diamond_purchased, chat, block_place, block_break, jump_pit, launcher, gapple_eat, ghead_eat, lava_bucket_use, fishing_rod, contract_count, bounty, renown, highest_streak", "'" + event.getPlayer().getUniqueId().toString() + "', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0'", "thepit");
 		}
 		
 		if(!SQL.exists("uuid", event.getPlayer().getUniqueId().toString(), "thepit_upgrades")) {
@@ -300,13 +292,6 @@ public class ListenerEvent implements Listener {
 	}
 	
 	@EventHandler
-	public void entityTouched(PlayerInteractAtEntityEvent e) {
-		if(ThePit.getInstance().getConfig().getInt("npc.items") == e.getRightClicked().getEntityId()) {
-			
-		}
-	}
-	
-	@EventHandler
 	public void npcAction(PlayerInteractAtEntityEvent e) {
 		Player player = e.getPlayer();
 		if(e.getRightClicked() instanceof NPC) {
@@ -325,7 +310,7 @@ public class ListenerEvent implements Listener {
 			}
 			if(npc.getFullName().startsWith("¡×7View your stats")) {
 				// NPC - Stats
-				
+				new AllStatsViewerGUI(player);
 			}
 			if(npc.getFullName().startsWith("¡×7Quests & Contracts")) {
 				// NPC - Quest Master
