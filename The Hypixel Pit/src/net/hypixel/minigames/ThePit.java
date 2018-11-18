@@ -1,6 +1,7 @@
 package net.hypixel.minigames;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,6 +16,7 @@ import net.hypixel.minigames.gamesystems.listeners.ListenerEvent;
 import net.hypixel.minigames.gamesystems.manager.PerkManager;
 import net.hypixel.minigames.gamesystems.schedulers.FreeXP;
 import net.hypixel.minigames.gamesystems.schedulers.HypixelBoard;
+import net.hypixel.minigames.gamesystems.scoreboard.Leaderboard;
 import net.hypixel.minigames.gamesystems.status.UserStatus;
 import net.hypixel.minigames.upgrades.perks.PerkRambo;
 
@@ -43,12 +45,13 @@ public class ThePit extends JavaPlugin {
 		DoPrestigeCMD.setPermissionMessage("This is Test Command for Developer, You cannot use this!");
 		
 		
-
+		// 神嫌 降持生稽 昔馬食 爽汐 坦軒.
 		//new Leaderboard(this, new Location(Bukkit.getWorlds().get(0), 13.5, 119, 0.5));
+		
 		getServer().getPluginManager().registerEvents(new ListenerEvent(), this);
 		getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 		getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", new PML_Bungee());
-		Bukkit.getConsoleSender().sendMessage("」aThe Hypixel Pit 」7- 」eCopied by 74F / Special Thanks: 」c[ADMIN] Minikloon 」eon Hypixel");
+		Bukkit.getConsoleSender().sendMessage("」aThe Hypixel Pit 」7- 」eCopied by 74F / Version: " + getVersion());
 		Bukkit.getConsoleSender().sendMessage("」aThe Hypixel Pit 」7- 」aEnabled!");
 		Bukkit.getConsoleSender().sendMessage("」aThe Hypixel Pit 」7- 」bWelcome to the Hypixel Pit!");
 		
@@ -85,13 +88,13 @@ public class ThePit extends JavaPlugin {
 					}
 				}
 			}
-		}, 0, 20);
+		}, 0, 10);
 		
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new FreeXP(), 0, 20*60*5);
 	}
 	
 	public void onDisable() {
-		Bukkit.getConsoleSender().sendMessage("」aThe Hypixel Pit 」7- 」cEnabled!");
+		Bukkit.getConsoleSender().sendMessage("」aThe Hypixel Pit 」7- 」cDisabled!");
 	}
 
 	public static ThePit getInstance() {

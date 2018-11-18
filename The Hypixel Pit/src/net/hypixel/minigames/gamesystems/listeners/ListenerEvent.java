@@ -40,6 +40,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import me.vagdedes.mysql.database.SQL;
 import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.npc.NPC;
+import net.citizensnpcs.npc.CitizensNPC;
 import net.hypixel.minigames.Settings;
 import net.hypixel.minigames.ThePit;
 import net.hypixel.minigames.gamesystems.manager.BountyManager;
@@ -307,7 +309,35 @@ public class ListenerEvent implements Listener {
 	@EventHandler
 	public void npcAction(PlayerInteractAtEntityEvent e) {
 		Player player = e.getPlayer();
-		
+		if(e.getRightClicked() instanceof NPC) {
+			NPC npc = (NPC) e.getRightClicked();
+			if(npc.getFullName().startsWith("」7Resets & Renown")) {
+				// NPC - Prestige
+				
+			}
+			if(npc.getFullName().startsWith("」7Non-permanent")) {
+				// NPC - Items Shop
+				
+			}
+			if(npc.getFullName().startsWith("」7Permanent")) {
+				// NPC - Upgrades Shop
+				
+			}
+			if(npc.getFullName().startsWith("」7View your stats")) {
+				// NPC - Stats
+				
+			}
+			if(npc.getFullName().startsWith("」7Quests & Contracts")) {
+				// NPC - Quest Master
+				
+			}
+			if(npc.getFullName().startsWith("」7Back to Lobby")) {
+				// NPC - The Keeper
+				
+			}
+			
+			
+		}
 	}
 	
 	/*@EventHandler
