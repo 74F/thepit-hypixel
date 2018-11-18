@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import net.hypixel.minigames.ThePit;
 
 public class BaseGUI {
+	
 	private String name;
 	private int size;
 	private GUIClickEventHandler handler;
