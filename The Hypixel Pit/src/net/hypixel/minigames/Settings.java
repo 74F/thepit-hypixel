@@ -2,6 +2,7 @@ package net.hypixel.minigames;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.bukkit.entity.Player;
 
@@ -25,6 +26,7 @@ public class Settings {
 	public static double[] neededGoldToPrestige = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	public static String[] levelColor = {"」7", "」7", "」7", "」7", "」7", "」7", "」7", "」7", "」7", "」9", "」9", "」9", "」9", "」9", "」9", "」9", "」9", "」9", "」9", "」3", "」3", "」3", "」3", "」3", "」3", "」3", "」3", "」3", "」3", "」2", "」2", "」2", "」2", "」2", "」2", "」2", "」2", "」2", "」2", "」a", "」a", "」a", "」a", "」a", "」a", "」a", "」a", "」a", "」a", "」e", "」e", "」e", "」e", "」e", "」e", "」e", "」e", "」e", "」e", "」6」l", "」6」l", "」6」l", "」6」l", "」6」l", "」6」l", "」6」l", "」6」l", "」6」l", "」6」l", "」c」l", "」c」l", "」c」l", "」c」l", "」c」l", "」c」l", "」c」l", "」c」l", "」c」l", "」c」l", "」4」l", "」4」l", "」4」l", "」4」l", "」4」l", "」4」l", "」4」l", "」4」l", "」4」l", "」4」l", "」5」l", "」5」l", "」5」l", "」5」l", "」5」l", "」5」l", "」5」l", "」5」l", "」5」l", "」5」l", "」d」l", "」d」l", "」d」l", "」d」l", "」d」l", "」d」l", "」d」l", "」d」l", "」d」l", "」d」l", "」f」l", "」f」l", "」f」l", "」f」l", "」f」l", "」f」l", "」f」l", "」f」l", "」f」l", "」f」l", "」b」l"};
 	public static int[] prestigeUpRenownRewards = {0, 10, 10, 10, 10, 20, 20, 20, 20, 20, 30, 30, 30, 30, 30, 40, 40, 40, 40, 40, 50, 50, 50, 50, 50, 60, 60, 60, 60, 60, 60};
+	public static Map<Player, Integer> fightTimer = new HashMap();
 	//public static Prestige prestige = new Prestige("Prestige", 27);
 	
 	public static SpecialStatus getServerStatus() {

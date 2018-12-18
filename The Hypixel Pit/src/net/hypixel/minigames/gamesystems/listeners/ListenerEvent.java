@@ -34,6 +34,8 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import me.vagdedes.mysql.database.SQL;
+import net.citizensnpcs.api.event.NPCClickEvent;
+import net.citizensnpcs.api.event.NPCLeftClickEvent;
 import net.citizensnpcs.api.npc.NPC;
 import net.hypixel.minigames.Settings;
 import net.hypixel.minigames.ThePit;
@@ -60,7 +62,7 @@ public class ListenerEvent implements Listener {
 	@EventHandler
 	public void onLoggedIn(PlayerJoinEvent event) {
 		if(!SQL.exists("uuid", event.getPlayer().getUniqueId().toString(), "thepit")) {
-			SQL.insertData("uuid, prestige, level, xp, total_xp, kills, assists, sword_hits, arrow_shot, arrow_hits, melee_damage_dealt, bow_damage_dealt, highest_streak, deaths, melee_damage_taken, bow_damage_taken, hours_played, total_gold, golds, gold_current_prestige, left_clicks, gold_earned, diamond_purchased, chat, block_place, block_break, jump_pit, launcher, gapple_eat, ghead_eat, lava_bucket_use, fishing_rod, contract_count, bounty, renown, highest_streak", "'" + event.getPlayer().getUniqueId().toString() + "', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0'", "thepit");
+			SQL.insertData("uuid, prestige, level, xp, total_xp, kills, assists, sword_hits, arrow_shot, arrow_hits, melee_damage_dealt, bow_damage_dealt, highest_streak, deaths, melee_damage_taken, bow_damage_taken, hours_played, total_gold, golds, gold_current_prestige, left_clicks, gold_earned, diamond_purchased, chat, block_place, block_break, jump_pit, launcher, gapple_eat, ghead_eat, lava_bucket_use, fishing_rod, contract_count, bounty, renown", "'" + event.getPlayer().getUniqueId().toString() + "', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0'", "thepit");
 		}
 		
 		if(!SQL.exists("uuid", event.getPlayer().getUniqueId().toString(), "thepit_upgrades")) {
@@ -70,6 +72,7 @@ public class ListenerEvent implements Listener {
 		event.getPlayer().sendMessage(" \n ");
 		
 		Settings.userStatus.put(event.getPlayer(), UserStatus.IDLE);
+		Settings.fightTimer.put(event.getPlayer(), 0);
 		Player player = event.getPlayer();
 		
 		String tabAndChatSyntax = ((String) SQL.get("prefix", "id", "=", (String) SQL.get("rank", "uuid", "=", event.getPlayer().getUniqueId().toString(), "userdata"), "rankdata")).substring(0, 2) + event.getPlayer().getName();
@@ -115,6 +118,9 @@ public class ListenerEvent implements Listener {
 		if(Settings.userStatus.containsKey(event.getPlayer())) {
 			Settings.userStatus.remove(event.getPlayer());
 		}
+		if(Settings.fightTimer.containsKey(event.getPlayer())) {
+			Settings.fightTimer.remove(event.getPlayer());
+		}
 	}
 	
 	@EventHandler
@@ -127,7 +133,7 @@ public class ListenerEvent implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onAttack(EntityDamageByEntityEvent e) {
-		if(e.getEntity() instanceof Player && (e.getDamager() instanceof Player || e.getDamager() instanceof Projectile || e.getDamager() instanceof TNTPrimed)) {
+		if(e.getEntity() instanceof Player && (e.getDamager() instanceof Player || e.getDamager() instanceof Projectile || e.getDamager() instanceof TNTPrimed) && !(e.getEntity() instanceof NPC)) {
 			Player damaged = (Player) e.getEntity();
 			Player attacker = null;
 			if(e.getDamager() instanceof Projectile) {
@@ -253,15 +259,22 @@ public class ListenerEvent implements Listener {
 				
 			}
 			
-			if(attacker.getItemInHand().getItemMeta().getLore().contains("」9+7 Attack Damage")) {
-				e.setDamage(7);
-			}
 			
-			if(attacker.getItemInHand().getItemMeta().getLore().contains("」9+8 Attack Damage")) {
-				e.setDamage(8);
+			if(attacker.getItemInHand().getItemMeta() != null) {
+				if(attacker.getItemInHand().getItemMeta().getLore() != null) {
+					if(attacker.getItemInHand().getItemMeta().getLore().contains("」9+7 Attack Damage")) {
+						e.setDamage(7);
+					}
+					
+					if(attacker.getItemInHand().getItemMeta().getLore().contains("」9+8 Attack Damage")) {
+						e.setDamage(8);
+					}
+				}
 			}
 
 			//Bukkit.getConsoleSender().sendMessage("Damage: " + e.getDamage());
+		} else {
+			return;
 		}
 	}
 	
@@ -292,37 +305,38 @@ public class ListenerEvent implements Listener {
 	}
 	
 	@EventHandler
-	public void npcAction(PlayerInteractAtEntityEvent e) {
-		Player player = e.getPlayer();
-		if(e.getRightClicked() instanceof NPC) {
-			NPC npc = (NPC) e.getRightClicked();
-			if(npc.getFullName().startsWith("」7Resets & Renown")) {
-				// NPC - Prestige
-				
-			}
-			if(npc.getFullName().startsWith("」7Non-permanent")) {
-				// NPC - Items Shop
-				
-			}
-			if(npc.getFullName().startsWith("」7Permanent")) {
-				// NPC - Upgrades Shop
-				
-			}
-			if(npc.getFullName().startsWith("」7View your stats")) {
-				// NPC - Stats
-				new AllStatsViewerGUI(player);
-			}
-			if(npc.getFullName().startsWith("」7Quests & Contracts")) {
-				// NPC - Quest Master
-				
-			}
-			if(npc.getFullName().startsWith("」7Back to Lobby")) {
-				// NPC - The Keeper
-				
-			}
-			
-			
+	public void npcAction(NPCClickEvent e) {
+		
+		Player player = e.getClicker();
+		player.sendMessage("ClickEvent Activated");
+		NPC npc = e.getNPC();
+		if(npc.getName().contains("Resets")) {
+			// NPC - Prestige
+			return;
 		}
+		if(npc.getName().contains("Non-permanent")) {
+			// NPC - Items Shop
+			return;
+		}
+		if(npc.getName().contains("Permanent")) {
+			// NPC - Upgrades Shop
+			return;
+		}
+		if(npc.getName().contains("View your")) {
+			// NPC - Stats
+			player.sendMessage("Test");
+			new AllStatsViewerGUI(player);
+			return;
+		}
+		if(npc.getName().contains("Quest")) {
+			// NPC - Quest Master
+			return;
+		}
+		if(npc.getName().contains("Back")) {
+			// NPC - The Keeper
+			return;
+		}
+		return;
 	}
 	
 	/*@EventHandler

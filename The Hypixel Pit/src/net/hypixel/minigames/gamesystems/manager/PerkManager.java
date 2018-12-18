@@ -40,9 +40,13 @@ public class PerkManager {
 	}
 	
 	public static boolean hasPerk(Player player, Perk perk) {
-		if(getPerkFromSlot(player, 1).getPerkId() == perk.getPerkId() || getPerkFromSlot(player, 2).getPerkId() == perk.getPerkId() || getPerkFromSlot(player, 3).getPerkId() == perk.getPerkId()){
+		if((getPerkFromSlot(player, 1).getPerkId() == perk.getPerkId() || getPerkFromSlot(player, 2).getPerkId() == perk.getPerkId() || getPerkFromSlot(player, 3).getPerkId() == perk.getPerkId()) && hasPurchasedPerk(player, perk)){
 			return true;
 		}
+		return false;
+	}
+	
+	public static boolean hasPurchasedPerk(Player player, Perk perk) {
 		return false;
 	}
 }

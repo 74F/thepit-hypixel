@@ -48,7 +48,7 @@ public class Leaderboard {
 		for(int i = 0;i<10;i++)
 		{
 			loc = loc.subtract(0, 0.2, 0);
-			armorstands.add(createArmorStand("」7Taba...", loc));
+			armorstands.add(createArmorStand("」7...", loc));
 		}
 		loc = loc.subtract(0, 0.4, 0);
 		createArmorStand(footer1, loc);
@@ -62,7 +62,7 @@ public class Leaderboard {
 		try {
 			connection = DriverManager.getConnection("jdbc:mysql:localhost:3306/fakepixel_network", "root", "secret00");
 			
-			PreparedStatement pstate = connection.prepareStatement("SELECT * FROM `total_xp` ORDER BY `total_xp` `total_xp` DESC LIMIT 10");
+			PreparedStatement pstate = connection.prepareStatement("SELECT * FROM `total_xp` ORDER BY `total_xp` `total_xp` DESC LIMIT 10;");
 			ResultSet rs = pstate.executeQuery();
 			int i = 0;
 			while(rs.next()) {
@@ -71,7 +71,7 @@ public class Leaderboard {
 			}
 			
 			for(;i<10;i++) {
-				armorstands.get(i).setCustomName("」7Tada...");
+				armorstands.get(i).setCustomName("」7...");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

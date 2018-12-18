@@ -1,7 +1,6 @@
 package net.hypixel.minigames;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,9 +14,10 @@ import net.hypixel.minigames.gamesystems.file.ConfigurationsList;
 import net.hypixel.minigames.gamesystems.gui.GUIListener;
 import net.hypixel.minigames.gamesystems.listeners.ListenerEvent;
 import net.hypixel.minigames.gamesystems.manager.PerkManager;
+import net.hypixel.minigames.gamesystems.schedulers.FightingMode;
 import net.hypixel.minigames.gamesystems.schedulers.FreeXP;
 import net.hypixel.minigames.gamesystems.schedulers.HypixelBoard;
-import net.hypixel.minigames.gamesystems.scoreboard.Leaderboard;
+import net.hypixel.minigames.gamesystems.schedulers.LevelingScheduler;
 import net.hypixel.minigames.gamesystems.status.UserStatus;
 import net.hypixel.minigames.upgrades.perks.PerkRambo;
 
@@ -69,18 +69,18 @@ public class ThePit extends JavaPlugin {
 		
 		for(Player online : Bukkit.getOnlinePlayers()) {
 			Settings.userStatus.put(online, UserStatus.IDLE);
+			Settings.fightTimer.put(online, 0);
 		}
 		
 		PerkManager.registerPerks();
 		
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new BukkitRunnable() {
+		
+		
+		Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, new BukkitRunnable() {
 			
 			@Override
 			public void run() {
 				for(Player online : Bukkit.getOnlinePlayers()) {
-					
-					
-					HypixelBoard.registerScoreboard(online);
 					String tabAndChatSyntax = ((String) SQL.get("prefix", "id", "=", (String) SQL.get("rank", "uuid", "=", online.getUniqueId().toString(), "userdata"), "rankdata")).substring(0, 2) + online.getName();
 					
 					online.setPlayerListName("¡×" + Settings.prestigeColorArray[Integer.parseInt(SQL.get("prestige", "uuid", "=", online.getUniqueId().toString(), "thepit").toString())] + "[" + Settings.levelColor[Integer.parseInt(SQL.get("level", "uuid", "=", online.getUniqueId().toString(), "thepit").toString())-1] + SQL.get("level", "uuid", "=", online.getUniqueId().toString(), "thepit").toString() + "¡×" + Settings.prestigeColorArray[Integer.parseInt(SQL.get("prestige", "uuid", "=", online.getUniqueId().toString(), "thepit").toString())] + "] " + tabAndChatSyntax);
@@ -93,9 +93,12 @@ public class ThePit extends JavaPlugin {
 					}
 				}
 			}
-		}, 0, 10);
+		}, 0L, 1L);
 		
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new FreeXP(), 0, 20*60*5);
+		Bukkit.getScheduler().runTaskTimer(this, new HypixelBoard(), 0L, 1L);
+		Bukkit.getScheduler().runTaskTimer(this, new FreeXP(), 0, 20*60*5);
+		Bukkit.getScheduler().runTaskTimer(this, new LevelingScheduler(), 0, 20*60*5);
+		Bukkit.getScheduler().runTaskTimer(this, new FightingMode(), 0, 20*60*5);
 	}
 	
 	public void onDisable() {

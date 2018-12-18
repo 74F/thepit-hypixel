@@ -18,7 +18,7 @@ public class Command_DoPrestige implements CommandExecutor {
 	public boolean onCommand(CommandSender cs, Command c, String l, String[] args) {
 		if(cs instanceof Player) {
 			Player player = (Player) cs;
-			if(ExperienceManager.getLevel(player) == 120 && PrestigeManager.getPrestige(player) != 30/* && (Double.parseDouble(SQL.get("gold_current_prestige", "uuid", "=", player.getUniqueId().toString(), "thepit").toString())/100) >= Settings.neededGoldToPrestige[Integer.parseInt(SQL.get("prestige", "uuid", "=", player.getUniqueId().toString(), "thepit").toString())+1]*/) {
+			if(ExperienceManager.getLevel(player) == 120 && PrestigeManager.getPrestige(player) != 30/** && (Double.parseDouble(SQL.get("gold_current_prestige", "uuid", "=", player.getUniqueId().toString(), "thepit").toString())/100) >= Settings.neededGoldToPrestige[Integer.parseInt(SQL.get("prestige", "uuid", "=", player.getUniqueId().toString(), "thepit").toString())+1]*/) {
 				PrestigeManager.setPrestige(player, PrestigeManager.getPrestige(player) + 1);
 				String playerText = ((String) SQL.get("prefix", "id", "=", (String) SQL.get("rank", "uuid", "=", player.getUniqueId().toString(), "userdata"), "rankdata")).substring(0, 2) + player.getName();
 				TitleManager.sendTitle(player, "」e」lPRESTIGE!", "」7You unlocked prestige 」e" + Settings.prestigeStringList[PrestigeManager.getPrestige(player)]);

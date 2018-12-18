@@ -1,23 +1,62 @@
 scoreboard:
+  name:
+  - "\xa7f\xa7lT\xa76\xa7lH\xa7e\xa7lE FAKEPIXEL PIT"
+  - "\xa7f\xa7lTH\xa76\xa7lE \xa7e\xa7lFAKEPIXEL PIT"
+  - "\xa7f\xa7lTHE \xa76\xa7lF\xa7e\xa7lAKEPIXEL PIT"
+  - "\xa7f\xa7lTHE F\xa76\xa7lA\xa7e\xa7lKEPIXEL PIT"
+  - "\xa7f\xa7lTHE FA\xa76\xa7lK\xa7e\xa7lEPIXEL PIT"
+  - "\xa7f\xa7lTHE FAK\xa76\xa7lE\xa7e\xa7lPIXEL PIT"
+  - "\xa7f\xa7lTHE FAKE\xa76\xa7lP\xa7e\xa7lIXEL PIT"
+  - "\xa7f\xa7lTHE FAKEP\xa76\xa7lI\xa7e\xa7lXEL PIT"
+  - "\xa7f\xa7lTHE FAKEPI\xa76\xa7lX\xa7e\xa7lEL PIT"
+  - "\xa7f\xa7lTHE FAKEPIX\xa76\xa7lE\xa7e\xa7lL PIT"
+  - "\xa7f\xa7lTHE FAKEPIXE\xa76\xa7lL \xa7e\xa7lPIT"
+  - "\xa7f\xa7lTHE FAKEPIXEL \xa76\xa7lP\xa7e\xa7lIT"
+  - "\xa7f\xa7lTHE FAKEPIXEL P\xa76\xa7lI\xa7e\xa7lT"
+  - "\xa7f\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7e\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7e\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7e\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7e\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7e\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7e\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7e\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7e\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7f\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7f\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7f\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7f\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7f\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7f\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7f\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7f\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7e\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7e\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7e\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7e\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7e\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7e\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7e\xa7lTHE FAKEPIXEL PIT"
+  - "\xa7e\xa7lTHE FAKEPIXEL PIT"
   default:
-  - '{DATE} {SERVER}'
-  - '」f'
+  - "{DATE} {SERVER}"
+  - "\xa7f"
   prestige:
-  - 'Prestige: {PRESTIGE}'
+  - "Prestige: {PRESTIGE}"
   no-event:
-  - 'Level: {LEVEL}'
-  - 'Needed XP: {NEEDED_XP}'
-  - '」f」f'
-  - 'Gold: {GOLD}'
-  - '」f」f」f'
-  - 'Status: {USER_STATUS}'
-  - '」f」f」f」f'
-  - '」ewww.hypixel.net'
+  - "Level: {LEVEL}"
+  - "Needed XP: {NEEDED_XP}"
+  - "\xa7f\xa7f"
+  - "Gold: {GOLD}"
+  - "\xa7f\xa7f\xa7f"
+  - "Status: {USER_STATUS}"
+  - "\xa7f\xa7f\xa7f\xa7f"
+  - "\xa7ewww.fakepixel.net"
   waiting-event:
-  - '」f'
+  - "\xa7f"
   event:
     ragepit:
-    - 'Event: {EVENT}'
-    - 'Starting in {EVENT_STARTS_AT}'
+    - "Event: {EVENT}"
+    - "Starting in {EVENT_STARTS_AT}"
   
   

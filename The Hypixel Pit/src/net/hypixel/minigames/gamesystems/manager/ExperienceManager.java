@@ -3,6 +3,8 @@ package net.hypixel.minigames.gamesystems.manager;
 import org.bukkit.entity.Player;
 
 import me.vagdedes.mysql.database.SQL;
+import net.citizensnpcs.Settings.Setting;
+import net.hypixel.minigames.Settings;
 
 public class ExperienceManager {
 
@@ -12,11 +14,11 @@ public class ExperienceManager {
 	}
 	
 	public static double getCurrentExp(Player player) {
-		return Double.parseDouble(SQL.get("xp", "uuid", "=", player.getUniqueId().toString(), "thepit").toString())/100;
+		return Double.parseDouble(SQL.get("xp", "uuid", "=", player.getUniqueId().toString(), "thepit").toString());
 	}
 	
 	public static double getTotalExp(Player player) {
-		return Double.parseDouble(SQL.get("total_xp", "uuid", "=", player.getUniqueId().toString(), "thepit").toString())/100;
+		return Double.parseDouble(SQL.get("total_xp", "uuid", "=", player.getUniqueId().toString(), "thepit").toString());
 	}
 	
 	public static void setExp(Player player, int i) {
@@ -29,6 +31,16 @@ public class ExperienceManager {
 	
 	public static int getLevel(Player player) {
 		return Integer.parseInt(SQL.get("level", "uuid", "=", player.getUniqueId().toString(), "thepit").toString());
+	}
+	
+	public static int getLevelByExp(int prestige, double exp) {
+		int i = 0;
+		for(;i<Settings.levelRegularXP.length;i++) {
+			if(Settings.levelRegularXP[i]*Settings.prestigeEXPPersent[prestige] >= exp) {
+				return i+1;
+			}
+		}
+		return i;
 	}
 	
 }
